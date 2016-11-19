@@ -1,0 +1,9 @@
+*-oauth2.json
+client_secrets.json
+.DS_Store
+__pycache__
+.idea
+*.sqlite
+node_modules
+bundle.js
+transcript.txt
