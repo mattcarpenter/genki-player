@@ -10,7 +10,6 @@ from bson import json_util
 
 mongo_client = MongoClient()
 db = mongo_client['genki']
-es = Elasticsearch()
 
 HELP_HINT = 'python lib.py -a <audio url> -n <name> -t <transcript file>'
 
@@ -79,18 +78,6 @@ def load(audio_url, name, transcript_file):
     # Insert recordings document into MongoDB
     print('Inserting into database...')
     db_response = db.recordings.insert_one(out)
-
-    # Insert each phrase into Elasticsearch
-    print('Indexing in Elasticsearch')
-    for index, phrase in enumerate(phrases):
-        doc = {
-            'refId': str(db_response.inserted_id),
-            'phraseIndex': index,
-            'original': phrase['transcript'],
-            'inverted': phrase['invertedTranscript']
-        }
-        es_response = es.index(index='genki', doc_type='phrase', body=doc)
-        print(es_response)
 
     print(json_util.dumps(out))
     print('Complete.')
