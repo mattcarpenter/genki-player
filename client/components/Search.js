@@ -43,7 +43,7 @@ class Captions extends React.Component {
       results.push(
         <SearchResult
           key={index}
-          video={result}
+          recording={result}
           words={words}
         />
       );

@@ -1,19 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Search from '../components/Search'
-import { searchVideos, searchVideosSuccess, searchVideosFailure } from '../actions/videos'
+import { searchRecordings, searchRecordingsSuccess, searchRecordingsFailure } from '../actions/recording'
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        searchResults: state.video.searchResults
+        searchResults: state.recording.searchResults
     };
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onSearch: (query) => {
-            dispatch(searchVideos(query)).then((response) => {
-                !response.error ? dispatch(searchVideosSuccess(response.payload)) : dispatch(searchVideosFailure(response.payload));
+            dispatch(searchRecordings(query)).then((response) => {
+                !response.error ? dispatch(searchRecordingsSuccess(response.payload)) : dispatch(searchRecordingsFailure(response.payload));
             });
         }
     };

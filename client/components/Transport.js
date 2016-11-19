@@ -3,7 +3,10 @@ import React from 'react'
 class Transport extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { progressWidth: 0 };
+    this.state = {
+      progressWidth: 0,
+      progressPosition: 0
+    };
   }
 
   componentDidMount() {
@@ -11,21 +14,15 @@ class Transport extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.currentTime !== this.props.currentTime) {
-      var constrainedCurrentTime = this.props.currentTime > this.props.duration ? this.props.duration : this.props.currentTime;
+    if (prevProps.time !== this.props.time) {
+      var constrainedCurrentTime = this.props.time > this.props.duration ? this.props.duration : this.props.time;
       this.setState({ progressPosition: constrainedCurrentTime * this.props.width / this.props.duration });
-    }
-  }
-
-  seek(time) {
-    if (typeof this.props.onSeek === 'function') {
-      this.props.onSeek(time);
     }
   }
 
   containsSearchTerms(caption) {
     var found = false;
-
+    return false;
     (caption.inverted || '').split(' ').forEach((word) => {
       (this.props.searchTerms || []).forEach((term) => {
         if (term === word) {
@@ -41,15 +38,20 @@ class Transport extends React.Component {
     var segments = [];
 
     // build segments
-    if (this.props.videoData && this.props.videoData.captionData) { 
-      this.props.videoData.captionData.forEach((caption, index) => {
-        let left = Number(caption.start) * this.props.width / this.props.duration;
-        let right = (Number(caption.end) * this.props.width / this.props.duration) + 1;
+    if (this.props.phrases && this.props.duration) { 
+      this.props.phrases.forEach((phrase, index) => {
+        // For this phrase, calculate the earliest start and latest end time of all words
+        let start = Math.min.apply(null, phrase.words.map((w) => w.start));
+        let end = Math.max.apply(null, phrase.words.map((w) => w.end));
+
+        let left = start * this.props.width / this.props.duration;
+        let right = (end * this.props.width / this.props.duration) + 1;
+
         segments.push(
           <div
-            onClick={()=>this.seek(caption.start)}
+            onClick={()=>this.props.onSeek(start)}
             key={index}
-            style={{ ...styles.segment, left: left, width: right-left, backgroundColor: this.containsSearchTerms(caption) ? '#efeab1' : '#F0F0F0' }}
+            style={{ ...styles.segment, left: left, width: right-left, backgroundColor: this.containsSearchTerms(phrase) ? '#efeab1' : '#F0F0F0' }}
             className="transport-segment">
           </div>
         );

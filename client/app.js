@@ -10,7 +10,7 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import * as reducers from './reducers'
 import Home from './components/Home'
 import AppContainer from './containers/AppContainer'
-import VideoContainer from './containers/VideoContainer'
+import RecordingContainer from './containers/RecordingContainer'
 
 const reducer = combineReducers({
   ...reducers,
@@ -28,7 +28,7 @@ ReactDOM.render(
       <Router history={history}>
         <Route path="/" component={AppContainer}>
           <IndexRoute component={Home}/>
-          <Route path="video/:videoId" component={VideoContainer}/>
+          <Route path="recording/:recordingId" component={RecordingContainer}/>
         </Route>
       </Router>
     </div>
