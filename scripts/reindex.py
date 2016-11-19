@@ -12,7 +12,7 @@ es = Elasticsearch()
 def main(argv):
     # Re-indexes the recordings in Elasticsearch
     print('Indexing in Elasticsearch')
-    
+
     try:
         es.indices.delete(index='genki')
     except:
