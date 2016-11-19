@@ -1,8 +1,9 @@
 #!/usr/bin/python
 
 import pexpect
+import os
 
-child = pexpect.spawn('java -Dkakasi.home=./bin -jar bin/lib/kakasi.jar -JH -iUTF-8 -oUTF-8')
+child = pexpect.spawn('java -Dkakasi.home=' + os.getcwd() + '/lib/bin -jar lib/bin/kakasi.jar -JH -iUTF-8 -oUTF-8')
 
 class Kakasi:
     def invert_tokens(self, tokens):
