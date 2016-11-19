@@ -1,7 +1,7 @@
 import React from 'react'
 import YouTube from 'react-youtube'
 import Transport from './Transport'
-import CaptionsContainer from '../containers/CaptionsContainer'
+import Captions from './Captions'
 import ReactPlayer from 'react-player'
 
 const PLAYER_WIDTH = 640;
@@ -63,6 +63,8 @@ class Recording extends React.Component {
           width={PLAYER_WIDTH}
           onSeek={this.seek.bind(this)}
         />
+        <Captions>
+        </Captions>
       </div>
     );
   }

@@ -18,7 +18,7 @@ export const RECORDING_STATE_PAUSED = 'RECORDING_STATE_PAUSED';
 export function fetchRecording(recordingId) {
 	const request = axios({
 		method: 'get',
-		url: '/recording?recordingId=' + recordingId,
+		url: '/api/recording/' + recordingId,
 		headers: []
 	});
 
@@ -54,7 +54,7 @@ export function setRecordingState(state) {
 export function searchRecordings(query) {
 	const request = axios({
 		method: 'get',
-		url: '/search?query=' + encodeURIComponent(query),
+		url: '/api/search?q=' + encodeURIComponent(query),
 		headers: []
 	});
 
