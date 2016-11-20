@@ -3,12 +3,19 @@ const Inert = require('inert');
 const Lout = require('lout');
 const Vision = require('vision');
 import * as routes from './routes'
+import Path from 'path'
 
-const config = { debug: { request: ['error'] } };
+const config = {
+    debug: {
+        request: ['error']
+    }
+}
+
 const server = new Hapi.Server(config);
 
 const port = 8080;
 const host = '0.0.0.0';
+
 server.connection({ port: port, host: host });
 
 const loutRegister = {
@@ -24,6 +31,16 @@ server.register([Vision, Inert, loutRegister], function(err) {
     }
 
     Object.keys(routes).forEach((key) => server.route(routes[key]));
+
+    server.route({
+        method: 'GET',
+        path: '/js/{file*}',
+        handler: {
+            directory: {
+                path: 'public/js'
+            }
+        }
+    })
     
     server.start(function () {
         console.log('Server running at:', server.info.uri);

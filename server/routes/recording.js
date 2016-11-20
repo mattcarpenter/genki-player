@@ -3,7 +3,7 @@
 
 export default {
     method: 'GET',
-    path: '/',
+    path: '/recording/{id}',
     config: {
         handler: (request, reply) => {
             reply.file('templates/index.html');

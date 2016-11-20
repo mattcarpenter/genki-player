@@ -4,7 +4,7 @@ var CircularDependencyPlugin = require('circular-dependency-plugin');
 
 module.exports = {
   entry: './app.js',
-  output: { path: __dirname + '/../server/static/js/', filename: 'bundle.js' },
+  output: { path: __dirname + '/../server/public/js/', filename: 'bundle.js' },
   plugins: [
     new CircularDependencyPlugin({
       failOnError: true
