@@ -7,6 +7,7 @@ from lib import kakasi
 from pymongo import MongoClient
 from elasticsearch import Elasticsearch
 from bson import json_util
+from mutagen.mp3 import MP3
 
 mongo_client = MongoClient()
 db = mongo_client['genki']
@@ -42,6 +43,13 @@ def main(argv):
 def load(audio_url, name, transcript_file):
     print('loading transcript and inverting kanji...')
 
+    try:
+        audio_filename = '/Users/matt/Desktop/genki/' + audio_url.split('/').pop()
+        audio = MP3(audio_filename)
+        duration = audio.info.length
+    except:
+        duration = 0
+
     fp = open(transcript_file, encoding='utf-8')
     transcript = json.load(fp)
     fp.close()
@@ -72,7 +80,8 @@ def load(audio_url, name, transcript_file):
     out = {
         'phrases': phrases,
         'name': name,
-        'url': audio_url
+        'url': audio_url,
+        'duration': duration
     }
 
     # Insert recordings document into MongoDB

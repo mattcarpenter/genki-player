@@ -9,7 +9,6 @@ class Recording extends React.Component {
     super(props);
 
     this.state = {
-      duration: 0,
       progress: 0,
       playing: false,
       width: 640
@@ -28,10 +27,6 @@ class Recording extends React.Component {
     this.props.clearRecording();
   }
 
-  onDuration(duration) {
-    this.setState({ duration: duration });
-  }
-
   onProgress(progress) {
     if (progress.played) {
       this.setState({ progress: progress.played });
@@ -43,7 +38,7 @@ class Recording extends React.Component {
   }
 
   seek(time) {
-    this.player.seekTo(time / this.state.duration);
+    this.player.seekTo(time / this.props.duration);
   }
 
   onTogglePlaying() {
@@ -68,7 +63,6 @@ class Recording extends React.Component {
             width={this.state.width}
             controls={false}
             height={30}
-            onDuration={this.onDuration.bind(this)}
             onProgress={this.onProgress.bind(this)}
             playing={this.state.playing}
             onPlay={this.onPlay.bind(this)}
@@ -78,8 +72,8 @@ class Recording extends React.Component {
         </div>
         <Transport
           phrases={(this.props.recordingData || {}).phrases}
-          duration={this.state.duration}
-          time={this.state.progress * this.state.duration}
+          duration={this.props.duration}
+          time={this.state.progress * this.props.duration}
           width={this.state.width}
           onSeek={this.seek.bind(this)}
           playing={this.state.playing}
@@ -89,7 +83,7 @@ class Recording extends React.Component {
         />
         <Captions
           phrases={(this.props.recordingData || {}).phrases}
-          time={this.state.progress * this.state.duration}
+          time={this.state.progress * this.props.duration}
           width={this.state.width}
         />
       </div>
