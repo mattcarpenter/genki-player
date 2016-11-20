@@ -2,6 +2,7 @@
 'use strict'
 
 import { getRecording } from '../../lib/dao'
+import { furiganize } from '../../lib/convert'
 import Joi from 'joi'
 import Boom from 'boom'
 
@@ -18,6 +19,9 @@ export default {
             getRecording(request.params.id)
                 .then((doc) => {
                     if (doc) {
+                        doc.phrases.forEach(function (phrase) {
+                            phrase.furiganized = furiganize(phrase.transcript)
+                        })
                         reply(doc);
                     } else {
                         reply(Boom.notFound('could not find reading'))
