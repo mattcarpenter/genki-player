@@ -13,5 +13,6 @@ kuroshiro.init((err) => {
 });
 
 export function furiganize(input) {
-	return ready ? kuroshiro.convert(input, {mode:'furigana', to:'hiragana'}) : input
+	// change mode to 'furigana' to generate furigana markup
+	return ready ? kuroshiro.convert(input, {mode:'normal', to:'hiragana'}) : input
 }

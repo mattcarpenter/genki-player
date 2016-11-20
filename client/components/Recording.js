@@ -48,7 +48,7 @@ class Recording extends React.Component {
             progressFrequency={10}
             width={PLAYER_WIDTH}
             controls={true}
-            height="auto"
+            height={30}
             onDuration={this.onDuration.bind(this)}
             onProgress={this.onProgress.bind(this)}
             playing={this.state.playing}
@@ -63,8 +63,11 @@ class Recording extends React.Component {
           width={PLAYER_WIDTH}
           onSeek={this.seek.bind(this)}
         />
-        <Captions>
-        </Captions>
+        <Captions
+          phrases={(this.props.recordingData || {}).phrases}
+          time={this.state.progress * this.state.duration}
+          width={PLAYER_WIDTH}
+        />
       </div>
     );
   }
