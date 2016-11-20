@@ -19,14 +19,9 @@ class SearchResult extends React.Component {
   render() {
     return (
       <li style={styles.container}>
-        <div style={styles.thumb}>
-          <img src={this.props.video.thumbnails.default.url}/>
-        </div>
-        <div>
-          <a href={'/video/' + this.props.video.youtubeVideoId + (this.props.words !== ',' ? '?words=' + this.props.words : '') }>
-            {this.props.video.title}
-          </a>
-        </div>
+        <a href={'/recording/' + this.props.recording._id + (this.props.words !== ',' ? '?words=' + this.props.words : '') }>
+          {this.props.recording.name}
+        </a>
       </li>
     );
   }
@@ -34,12 +29,7 @@ class SearchResult extends React.Component {
 
 const styles = {
   container: {
-    display: 'flex',
-    flexDirection: 'row',
-    marginBottom: 15
-  },
-  thumb: {
-    marginRight: 15
+    padding: 10
   }
 };
 

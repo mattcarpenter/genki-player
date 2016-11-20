@@ -92,7 +92,14 @@ const styles = {
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
-  word: {}
+  word: {
+    margin: 5,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: '#F0F0F0',
+    backgroundColor: '#FAFAFA',
+    padding: 5
+  }
 }
 
 export default Captions

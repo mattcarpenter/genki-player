@@ -13,7 +13,7 @@ const config = {
 
 const server = new Hapi.Server(config);
 
-const port = 8080;
+const port = 80;
 const host = '0.0.0.0';
 
 server.connection({ port: port, host: host });

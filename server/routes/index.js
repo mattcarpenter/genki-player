@@ -1,4 +1,5 @@
 export home from './home'
 export recording from './recording'
 export recordingApi from './api/recording'
+export recordingsApi from './api/recordings'
 export searchApi from './api/search'

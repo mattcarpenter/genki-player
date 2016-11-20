@@ -8,7 +8,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 import * as reducers from './reducers'
-import Home from './components/Home'
+import HomeContainer from './containers/HomeContainer'
 import AppContainer from './containers/AppContainer'
 import RecordingContainer from './containers/RecordingContainer'
 
@@ -27,7 +27,7 @@ ReactDOM.render(
     <div>
       <Router history={history}>
         <Route path="/" component={AppContainer}>
-          <IndexRoute component={Home}/>
+          <IndexRoute component={HomeContainer}/>
           <Route path="recording/:recordingId" component={RecordingContainer}/>
         </Route>
       </Router>

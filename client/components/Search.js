@@ -37,6 +37,8 @@ class Captions extends React.Component {
   render() {
     // compose search results
     var results = [];
+    var resultsContainer = [];
+
     var words = (this.state.query || '').split(' ').join(',');
 
     this.state.results.forEach((result, index) => {
@@ -49,6 +51,17 @@ class Captions extends React.Component {
       );
     });
 
+    if (results.length > 0) {
+      resultsContainer.push(
+        <div key="0" style={styles.results}>
+          <strong>Search Results</strong><br/>
+          <ul>
+            {results}
+          </ul>
+        </div>
+      );
+    }
+
     return (
       <div style={styles.container}>
         <form style={styles.form} onSubmit={this.submit.bind(this)}>
@@ -58,9 +71,7 @@ class Captions extends React.Component {
           </div>
           <button type="button" className="btn btn-default" onClick={this.search.bind(this)}>Search</button>
         </form>
-        <ul style={styles.results}>
-          {results}
-        </ul>
+        {resultsContainer}
       </div>
     );
   }
@@ -75,10 +86,12 @@ const styles = {
     width: '100%'
   },
   results: {
-    listStyleType: 'none',
-    padding: 0,
-    margin: 0,
-    marginTop: 20
+    padding: 10,
+    marginTop: 20,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#F0F0F0',
+    backgroundColor: '#FAFAFA'
   }
 }
 

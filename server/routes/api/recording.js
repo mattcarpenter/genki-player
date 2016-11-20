@@ -2,7 +2,7 @@
 'use strict'
 
 import { getRecording } from '../../lib/dao'
-import { furiganize } from '../../lib/convert'
+import { furiganize, invert } from '../../lib/convert'
 import Joi from 'joi'
 import Boom from 'boom'
 
@@ -20,7 +20,13 @@ export default {
                 .then((doc) => {
                     if (doc) {
                         doc.phrases.forEach(function (phrase) {
+                            // Furiganize the whole transcript
                             phrase.furiganized = furiganize(phrase.transcript)
+
+                            // Invert each word
+                            phrase.words.forEach(function (word) {
+                                word.inverted = invert(word.word)
+                            });
                         })
                         reply(doc);
                     } else {

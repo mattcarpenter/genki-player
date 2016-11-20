@@ -4,6 +4,10 @@ export const FETCH_RECORDING = 'FETCH_RECORDING';
 export const FETCH_RECORDING_SUCCESS = 'FETCH_RECORDING_SUCCESS';
 export const FETCH_RECORDING_FAILURE = 'FETCH_RECORDING_FAILURE';
 
+export const FETCH_ALL_RECORDINGS = 'FETCH_ALL_RECORDINGS';
+export const FETCH_ALL_RECORDINGS_SUCCESS = 'FETCH_ALL_RECORDINGS_SUCCESS';
+export const FETCH_ALL_RECORDINGS_FAILURE = 'FETCH_ALL_RECORDINGS_FAILURE';
+
 export const SEARCH_RECORDINGS = 'SEARCH_RECORDINGS';
 export const SEARCH_RECORDINGS_SUCCESS = 'SEARCH_RECORDINGS_SUCCESS';
 export const SEARCH_RECORDINGS_FAILURE = 'SEARCH_RECORDINGS_FAILURE';
@@ -25,6 +29,33 @@ export function fetchRecording(recordingId) {
 	return {
 		type: FETCH_RECORDING,
 		payload: request
+	};
+}
+
+export function fetchAllRecordings(recordingId) {
+	const request = axios({
+		method: 'get',
+		url: '/api/recording/',
+		headers: []
+	});
+
+	return {
+		type: FETCH_ALL_RECORDINGS,
+		payload: request
+	};
+}
+
+export function fetchAllRecordingsSuccess(recordings) {
+	return {
+		type: FETCH_ALL_RECORDINGS_SUCCESS,
+		payload: recordings
+	};
+}
+
+export function fetchAllRecordingsFailure(recordings) {
+	return {
+		type: FETCH_ALL_RECORDINGS_FAILURE,
+		payload: recordings
 	};
 }
 

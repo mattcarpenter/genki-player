@@ -49,3 +49,20 @@ export function getRecordings(ids) {
             })
     })
 }
+
+/**
+ * Gets all recordings
+ * @returns {promise}
+ */
+export function getAllRecordings() {
+    return new Promise((resolve, reject) => {
+        recordings.find({})
+            .toArray()
+            .then((docs) => {
+                resolve(docs)
+            })
+            .catch((err) => {
+                reject(err)
+            })
+    })
+}
