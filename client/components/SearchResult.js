@@ -19,9 +19,9 @@ class SearchResult extends React.Component {
   render() {
     return (
       <li style={styles.container}>
-        <a href={'/recording/' + this.props.recording._id + (this.props.words !== ',' ? '?words=' + this.props.words : '') }>
+        <Link to={'/recording/' + this.props.recording._id + (this.props.words !== ',' ? '?words=' + this.props.words : '') } >
           {this.props.recording.name}
-        </a>
+        </Link>
       </li>
     );
   }
@@ -29,7 +29,7 @@ class SearchResult extends React.Component {
 
 const styles = {
   container: {
-    padding: 10
+    padding: 5
   }
 };
 

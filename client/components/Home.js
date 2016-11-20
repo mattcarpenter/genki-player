@@ -9,7 +9,9 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchAll();
+        if (!this.props.recordings) {
+            this.props.fetchAll();
+        }
     }
 
     render() {
@@ -25,10 +27,11 @@ class Home extends React.Component {
         });
 
         return (
-            <div>
+            <div className="col-xs-12 col-md-8 col-lg-6">
                 <SearchContainer/>
-                <div style={styles.all}>
-                    <ul>
+                <div style={styles.container}>
+                    <h4>All Recordings</h4>
+                    <ul style={styles.ul}>
                         {recordings}
                     </ul>
                 </div>
@@ -38,7 +41,11 @@ class Home extends React.Component {
 }
 
 const styles = {
-    all: {
+    container: {
+        marginTop: 15
+    },
+    ul: {
+        paddingLeft: 18
     }
 }
 

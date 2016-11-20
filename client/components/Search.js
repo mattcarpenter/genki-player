@@ -54,7 +54,7 @@ class Captions extends React.Component {
     if (results.length > 0) {
       resultsContainer.push(
         <div key="0" style={styles.results}>
-          <strong>Search Results</strong><br/>
+          <h5>Search Results</h5>
           <ul>
             {results}
           </ul>
@@ -64,12 +64,13 @@ class Captions extends React.Component {
 
     return (
       <div style={styles.container}>
-        <form style={styles.form} onSubmit={this.submit.bind(this)}>
-          <div className="form-group">
-            <label htmlFor="query">Search Query</label>
-            <input type="text" className="form-control" id="query" onChange={this.handleQueryChange.bind(this)}/>
+        <form className="form-horizontal" style={styles.form} onSubmit={this.submit.bind(this)}>
+          <div style={styles.left}>
+            <input type="text" style={styles.input} className="form-control" id="query" onChange={this.handleQueryChange.bind(this)}/>
           </div>
-          <button type="button" className="btn btn-default" onClick={this.search.bind(this)}>Search</button>
+          <div style={styles.right}>
+            <button style={styles.button} type="button" className="btn btn-default" onClick={this.search.bind(this)}>Search</button>
+          </div>
         </form>
         {resultsContainer}
       </div>
@@ -78,20 +79,27 @@ class Captions extends React.Component {
 }
 
 const styles = {
+  left: {
+    flexGrow: 1,
+    marginRight: 5
+  },
+  input: {
+  },
   container: {
-    flex: 1,
-    width: 640
   },
   form: {
-    width: '100%'
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row'
   },
   results: {
     padding: 10,
     marginTop: 20,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: '#F0F0F0',
-    backgroundColor: '#FAFAFA'
+    borderColor: '#E0E0E0',
+    backgroundColor: '#FAFAFA',
+    borderStyle: 'solid'
   }
 }
 

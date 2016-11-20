@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Recording  from '../components/Recording'
-import { fetchRecording, fetchRecordingSuccess, fetchRecordingFailure } from '../actions/recording'
+import { fetchRecording, fetchRecordingSuccess, fetchRecordingFailure, clearRecording } from '../actions/recording'
 import { setVolume } from '../actions/session'
 import { RECORDING_STATE_LOADED } from '../actions/recording'
 
@@ -20,6 +20,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(fetchRecording(recordingId)).then((response) => {
         !response.error ? dispatch(fetchRecordingSuccess(response.payload)) : dispatch(fetchRecordingFailure(response.payload));
       });
+    },
+    clearRecording: () => {
+      dispatch(clearRecording());
     },
     setVolume: (volume) => {
       dispatch(setVolume(volume));

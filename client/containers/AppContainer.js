@@ -6,9 +6,7 @@ export default function AppContainer({ children }) {
     <div className="container" style={styles.container}>
       <header style={styles.header}>
         <h1>=＾● ⋏ ●＾=</h1>
-        <navigation>
-          <a href="/">Home</a>
-        </navigation>
+        <Link to="/">Home</Link>
       </header>
       {children}
     </div>
@@ -17,12 +15,8 @@ export default function AppContainer({ children }) {
 
 const styles = {
   header: {
-    marginBottom: 20,
-    borderBottomStyle: 'solid',
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
-    paddingBottom: 20,
-    width: 640
+    marginBottom: 40,
+    textAlign: 'center'
   },
   container: {
     display: 'flex',
