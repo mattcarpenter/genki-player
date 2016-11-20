@@ -12,7 +12,7 @@ output = [];
 
 items.forEach(function (item) {
   var root = '/Users/matt/Desktop/genki/';
-  var cmd = 'curl -X POST -H "Authorization: ' + authStr + '" -H "Content-Type: audio/flac" -H "Cache-Control: no-cache" -H "Postman-Token: a58b007a-ca28-82b5-b314-30a73f65adb9" "https://stream.watsonplatform.net/speech-to-text/api/v1/recognize?timestamps=true&word_alternatives_threshold=0.9&continuous=true&model=ja-JP_BroadbandModel" --data-binary @' + root + item.filename.replace('mp3', 'flac') + ' > ' + item.filename.replace('mp3', 'json');
+  var cmd = 'curl -X POST -H "Authorization: ' + authStr + '" -H "Content-Type: audio/flac" -H "Cache-Control: no-cache" -H "Postman-Token: a58b007a-ca28-82b5-b314-30a73f65adb9" "https://stream.watsonplatform.net/speech-to-text/api/v1/recognize?timestamps=true&word_alternatives_threshold=0.7&continuous=true&model=ja-JP_BroadbandModel" --data-binary @' + root + item.filename.replace('mp3', 'flac') + ' > ' + item.filename.replace('mp3', 'json');
   
   console.log(cmd);
 

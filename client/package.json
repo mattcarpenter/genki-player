@@ -17,6 +17,7 @@
     "babel-preset-stage-0": "^6.16.0",
     "circular-dependency-plugin": "^2.0.0",
     "kuroshiro": "^0.1.2",
+    "moment": "^2.16.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-player": "^0.12.1",

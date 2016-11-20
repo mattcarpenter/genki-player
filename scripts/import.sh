@@ -133,7 +133,6 @@ python import.py -n "Dialogue I, p. 266" -a http://www.uvm.edu/~uvmlrc/Genki1-2n
 python import.py -n "Dialogue II, p. 266" -a http://www.uvm.edu/~uvmlrc/Genki1-2ndaudio/Genki1-2nd-12-02.mp3 -t Genki1-2nd-12-02.json
 python import.py -n "Vocabulary, pp. 268-269" -a http://www.uvm.edu/~uvmlrc/Genki1-2ndaudio/Genki1-2nd-12-03.mp3 -t Genki1-2nd-12-03.json
 python import.py -n "Practice I-A, p. 276" -a http://www.uvm.edu/~uvmlrc/Genki1-2ndaudio/Genki1-2nd-12-04.mp3 -t Genki1-2nd-12-04.json
-python import.py -n "Practice I-B,  p. 277" -a http://www.uvm.edu/~uvmlrc/Genki1-2ndaudio/Genki1-2nd-12-05.mp3 -t Genki1-2nd-12-05.json
 python import.py -n "Practice II-A pp. 278-279" -a http://www.uvm.edu/~uvmlrc/Genki1-2ndaudio/Genki1-2nd-12-06.mp3 -t Genki1-2nd-12-06.json
 python import.py -n "Practice III-A, p. 280" -a http://www.uvm.edu/~uvmlrc/Genki1-2ndaudio/Genki1-2nd-12-07.mp3 -t Genki1-2nd-12-07.json
 python import.py -n "Practice IV-A, p. 281" -a http://www.uvm.edu/~uvmlrc/Genki1-2ndaudio/Genki1-2nd-12-08.mp3 -t Genki1-2nd-12-08.json

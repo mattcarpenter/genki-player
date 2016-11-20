@@ -39,6 +39,18 @@ class Recording extends React.Component {
     this.player.seekTo(time / this.state.duration);
   }
 
+  onTogglePlaying() {
+    if (!this.state.playing) {
+      this.setState({ playing: true });
+    } else {
+      this.setState({ playing: false });
+    }
+  }
+
+  onVolumeChange(volume) {
+    this.props.setVolume(volume);
+  }
+
   render() {
     return (
       <div style={styles.container}>
@@ -47,13 +59,14 @@ class Recording extends React.Component {
             url={(this.props.recordingData || {}).url}
             progressFrequency={10}
             width={PLAYER_WIDTH}
-            controls={true}
+            controls={false}
             height={30}
             onDuration={this.onDuration.bind(this)}
             onProgress={this.onProgress.bind(this)}
             playing={this.state.playing}
             onPlay={this.onPlay.bind(this)}
             ref={(player) => this.player = player}
+            volume={this.props.volume}
           />
         </div>
         <Transport
@@ -62,6 +75,10 @@ class Recording extends React.Component {
           time={this.state.progress * this.state.duration}
           width={PLAYER_WIDTH}
           onSeek={this.seek.bind(this)}
+          playing={this.state.playing}
+          onTogglePlaying={this.onTogglePlaying.bind(this)}
+          volume={this.props.volume}
+          onVolumeChange={this.onVolumeChange.bind(this)}
         />
         <Captions
           phrases={(this.props.recordingData || {}).phrases}
@@ -80,7 +97,7 @@ const styles = {
   },
 
   player: {
-    position: 'relative'
+    display: 'none'
   }
 };
 

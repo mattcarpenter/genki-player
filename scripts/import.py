@@ -62,7 +62,7 @@ def load(audio_url, name, transcript_file):
                     'start': timestamp[1],
                     'end': timestamp[2]
                 })
-            if confidence > 0.7:
+            if confidence > 0.39:
                 phrases.append({
                     'words': words,
                     'confidence': confidence,

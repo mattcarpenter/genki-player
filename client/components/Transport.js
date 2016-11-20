@@ -34,6 +34,10 @@ class Transport extends React.Component {
     return found;
   }
 
+  onVolumeChange(event) {
+    this.props.onVolumeChange(Number(event.target.value));
+  }
+
   render() {
     var segments = [];
 
@@ -58,24 +62,77 @@ class Transport extends React.Component {
       });
     }
 
+    var playButtonClassname = 'fa fa-' + (this.props.playing ? 'pause' : 'play');
+
     // return transport container with segments and position indicator
     return (
       <div style={{ ...styles.container, width: this.props.width }}>
-        {segments}
-        <div style={{ ...styles.progress, left: this.state.progressPosition }}></div>
+        <div style={{ ...styles.transport, width: this.props.width }}>
+          {segments}
+          <div style={{ ...styles.progress, left: this.state.progressPosition }}></div>
+        </div>
+        <div style={styles.controls}>
+          <div style={styles.left}>
+            <button
+              style={styles.playButton}
+              onClick={()=> this.props.onTogglePlaying()} >
+                <i className={playButtonClassname} aria-hidden="true"></i>
+            </button>
+            <div style={styles.time}>
+              {secondsToHms(this.props.time)} / {secondsToHms(this.props.duration)}
+            </div>
+          </div>
+          <div style={styles.volumeContainer}>
+            <div style={{ marginRight: 10 }}>
+              <i className="fa fa-volume-up" aria-hidden="true"></i>
+            </div>
+            <input
+              type="range"
+              min={0}
+              max={1}
+              step={0.01}
+              width="120px"
+              value={this.props.volume}
+              onChange={(event) => this.onVolumeChange(event)} />
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 const styles = {
-  container: {
+  time: {
+    display: 'inline-block',
+    fontSize: '0.92em'
+  },
+  volumeContainer: {
+    width: '100px',
+    display: 'flex'
+  },
+  playButton: {
+    marginRight: 10,
+    width: '27px'
+  },
+  transport: {
     borderWidth: 1.0,
     borderStyle: 'solid',
     borderColor: '#A0A0A0',
     height: 40,
-    marginBottom: 15,
+    marginBottom: 10,
     position: 'relative'
+  },
+  left: {
+    marginRight: 'auto'
+  },
+  controls: {
+    padding: 5,
+    borderStyle: 'solid',
+    borderColor: '#E0E0E0',
+    borderWidth: 1,
+    backgroundColor: '#FAFAFA',
+    display: 'flex',
+    justifyContent: 'flex-end'
   },
   progress: {
     height: '38px',
@@ -93,8 +150,17 @@ const styles = {
     borderTopWidth: 0,
     borderBottomWidth: 0,
     borderStyle: 'solid',
-    borderColor: '#D9D9D9'
+    borderColor: '#D9D9D9',
+    cursor: 'pointer'
   }
 };
+
+function secondsToHms(d) {
+  d = Number(d);
+  var h = Math.floor(d / 3600);
+  var m = Math.floor(d % 3600 / 60);
+  var s = Math.floor(d % 3600 % 60);
+  return ((h > 0 ? h + ":" + (m < 10 ? "0" : "") : "") + m + ":" + (s < 10 ? "0" : "") + s);
+}
 
 export default Transport

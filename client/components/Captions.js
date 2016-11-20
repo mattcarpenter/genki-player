@@ -86,6 +86,7 @@ class Captions extends React.Component {
 
 const styles = {
   container: {
+    marginTop: 10,
     fontSize: '30px',
     color: '#333',
     display: 'flex',
@@ -93,7 +94,8 @@ const styles = {
     flexWrap: 'wrap',
   },
   word: {
-    margin: 5,
+    marginRight: 5,
+    marginBottom: 5,
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: '#F0F0F0',
