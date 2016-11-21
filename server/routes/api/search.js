@@ -3,10 +3,11 @@
 
 import { Client } from 'elasticsearch'
 import { getRecordings } from '../../lib/dao'
+import process from 'process'
 import Boom from 'boom'
 
 const client = new Client({
-  host: 'localhost:9200',
+  host: (process.env.ELASTICSEARCH_HOST || 'localhost') + ':9200',
   log: 'trace'
 });
 
@@ -16,7 +17,6 @@ export default {
     config: {
         handler: (request, reply) => {
             let query = request.query.q;
-
             client.search({
             	index: 'genki',
             	body: {

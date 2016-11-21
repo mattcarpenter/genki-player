@@ -1,0 +1,29 @@
+version: "2"
+services:
+  web:
+    environment:
+      - MONGO_HOST=mongo
+      - ELASTICSEARCH_HOST=elasticsearch
+    build: .
+    volumes:
+      - ./server/:/app
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+      - elasticsearch
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo:/data/db
+  elasticsearch:
+    image: elasticsearch
+    ports:
+      - "9200:9200"
+    volumes:
+      - es:/var/lib/elasticsearch/data
+volumes:
+  mongo:
+  es:

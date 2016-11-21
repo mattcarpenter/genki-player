@@ -1,0 +1,75 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "mongo"
+    },
+    {
+      "name": "es"
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "genki",
+      "image": "genki",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "hostPort": 3000,
+          "containerPort": 3000
+        }
+      ],
+      "links": [
+        "mongo",
+        "elasticsearch"
+      ],
+      "environment": [
+        {
+          "name": "MONGO_HOST",
+          "value": "mongo"
+        },
+        {
+          "name": "ELASTICSEARCH_HOST",
+          "value": "elasticsearch"
+        }
+      ]
+    },
+    {
+      "name": "mongo",
+      "image": "mongo",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "hostPort": 27017,
+          "containerPort": 27017
+        }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "mongo",
+          "containerPath": "/data/db"
+        }
+      ]
+    },
+    {
+      "name": "elasticsearch",
+      "image": "elasticsearch",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "hostPort": 9200,
+          "containerPort": 9200
+        }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "es",
+          "containerPath": "/var/lib/elasticsearch/data"
+        }
+      ]
+    }
+  ]
+}

@@ -2,11 +2,13 @@
  'use strict'
 
 import { MongoClient, ObjectID } from 'mongodb'
+import process from 'process'
 
+var MONGO_HOST = process.env.MONGO_HOST || 'localhost'
 var recordings
 
 // Establish connection to MongoDB
-MongoClient.connect('mongodb://localhost:27017/genki', (err, db) => {
+MongoClient.connect('mongodb://' + MONGO_HOST + ':27017/genki', (err, db) => {
     if (!err) {
         console.log('Successfully connected to MongoDB')
         recordings = db.collection('recordings');
