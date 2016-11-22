@@ -9,3 +9,8 @@ bundle.js
 transcript.txt
 npm-debug.log
 auth.json
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
