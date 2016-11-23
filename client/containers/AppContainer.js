@@ -5,7 +5,7 @@ export default function AppContainer({ children }) {
   return (
     <div className="container" style={styles.container}>
       <header style={styles.header}>
-        <h1>=＾● ⋏ ●＾=</h1>
+        <h1>ฅ^•ﻌ•^ฅ</h1>
         <Link to="/">Home</Link>
       </header>
       {children}
