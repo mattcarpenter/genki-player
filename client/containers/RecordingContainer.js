@@ -11,7 +11,8 @@ const mapStateToProps = (state, ownProps) => {
     recordingData: state.recording.data,
     searchTerms: (ownProps.location.query.words || '').split(','),
     volume: state.session.volume,
-    duration: (state.recording.data || {}).duration || 0
+    duration: (state.recording.data || {}).duration || 0,
+    searchResults: state.recording.searchResults
   };
 }
 

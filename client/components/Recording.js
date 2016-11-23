@@ -1,8 +1,9 @@
 import React from 'react'
 import YouTube from 'react-youtube'
 import Transport from './Transport'
-import Captions from './Captions'
+import Captions from '../containers/CaptionsContainer'
 import ReactPlayer from 'react-player'
+import SearchResult from './SearchResult'
 
 class Recording extends React.Component {
   constructor(props) {
@@ -11,8 +12,26 @@ class Recording extends React.Component {
     this.state = {
       progress: 0,
       playing: false,
-      width: 640
+      width: 640,
+      searchResults: []
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('willReceivePrps', this.props, nextProps);
+    if (this.props.recordingId !== nextProps.recordingId) {
+      // initialize and kick off loading of new props
+      this.setState({
+        progress: 0,
+        playing: false
+      });
+
+      this.props.fetchRecording(nextProps.recordingId);
+    }
+
+    if (nextProps.searchResults !== this.state.searchResults) {
+      this.setState({ searchResults: nextProps.searchResults });
+    }
   }
 
   componentWillMount() {
@@ -54,6 +73,29 @@ class Recording extends React.Component {
   }
 
   render() {
+
+    var searchResults = [];
+    var searchContainer = [];
+    (this.state.searchResults || []).forEach((result, index) => {
+      searchResults.push(
+        <SearchResult
+          key={index}
+          recording={result}
+        />
+      );
+    });
+
+    if (searchResults.length > 0) {
+      searchContainer.push(
+        <div key="0" style={styles.results}>
+          <h5>Search Results</h5>
+          <ul style={styles.ul}>
+            {searchResults}
+          </ul>
+        </div>
+      );
+    }
+
     return (
       <div style={styles.container}>
         <div style={styles.player}>
@@ -80,12 +122,14 @@ class Recording extends React.Component {
           onTogglePlaying={this.onTogglePlaying.bind(this)}
           volume={this.props.volume}
           onVolumeChange={this.onVolumeChange.bind(this)}
+          searchTerms={(this.props.location.query.words || '').split(',')}
         />
         <Captions
           phrases={(this.props.recordingData || {}).phrases}
           time={this.state.progress * this.props.duration}
           width={this.state.width}
         />
+        {searchContainer}
       </div>
     );
   }
@@ -100,6 +144,16 @@ const styles = {
 
   player: {
     display: 'none'
+  },
+
+  results: {
+    padding: 10,
+    marginTop: 20,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+    backgroundColor: '#FAFAFA',
+    borderStyle: 'solid'
   }
 };
 

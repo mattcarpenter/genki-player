@@ -58,6 +58,10 @@ class Captions extends React.Component {
     return shouldUpdate;
   }
 
+  onClick(query) {
+    this.props.onSearch(query);
+  }
+
   render() {
     // build components
     var words = [];
@@ -69,6 +73,7 @@ class Captions extends React.Component {
         <div
           key={index}
           style={{ ...styles.word, color: color }}
+          onClick={() => this.onClick.call(this, word.inverted)}
         >
           {word.inverted}
         </div>
@@ -91,7 +96,7 @@ const styles = {
     color: '#333',
     display: 'flex',
     flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexWrap: 'wrap'
   },
   word: {
     marginRight: 5,
@@ -100,7 +105,8 @@ const styles = {
     borderStyle: 'solid',
     borderColor: '#F0F0F0',
     backgroundColor: '#FAFAFA',
-    padding: 5
+    padding: 5,
+    cursor: 'pointer'
   }
 }
 

@@ -18,8 +18,12 @@ const reducer = combineReducers({
 });
 
 const enhancer = compose(applyMiddleware(promise));
-
-const store = createStore(reducer, {}, enhancer);
+const initialState = {
+  recording: {
+    allRecordings: window.G_RECORDINGS || null
+  }
+};
+const store = createStore(reducer, initialState, enhancer);
 const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(

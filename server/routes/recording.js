@@ -1,12 +1,15 @@
 
 'use strict'
 
+var fs = require('fs');
+
 export default {
     method: 'GET',
     path: '/recording/{id}',
     config: {
         handler: (request, reply) => {
-            reply.file('templates/index.html');
+            var html = fs.readFileSync('templates/index.html').toString();
+        	reply(html.replace('%%RECORDINGS%%', 'null'));
         }
     }
 }

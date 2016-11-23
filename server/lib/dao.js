@@ -58,7 +58,7 @@ export function getRecordings(ids) {
  */
 export function getAllRecordings() {
     return new Promise((resolve, reject) => {
-        recordings.find({})
+        recordings.find({}, {phrases: 0})
             .toArray()
             .then((docs) => {
                 resolve(docs)

@@ -22,6 +22,7 @@ class Home extends React.Component {
                 <SearchResult
                     key={index}
                     recording={recording}
+                    words=","
                 />
             );
         });
